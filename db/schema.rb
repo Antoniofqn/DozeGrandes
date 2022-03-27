@@ -10,9 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_03_27_155150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "clubs", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "matches", force: :cascade do |t|
+    t.string "stadium"
+    t.string "competition"
+    t.integer "score_home"
+    t.integer "score_away"
+    t.string "result"
+    t.date "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "home_id"
+    t.bigint "away_id"
+    t.index ["away_id"], name: "index_matches_on_away_id"
+    t.index ["home_id"], name: "index_matches_on_home_id"
+  end
+
+  add_foreign_key "matches", "clubs", column: "away_id"
+  add_foreign_key "matches", "clubs", column: "home_id"
 end
