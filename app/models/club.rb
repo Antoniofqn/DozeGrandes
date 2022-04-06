@@ -3,4 +3,5 @@ class Club < ApplicationRecord
                             foreign_key: 'home_id'
   has_many :away_matches, class_name: 'Match',
                             foreign_key: 'away_id'
+  has_one_attached :photo
 end
