@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+atletico = Club.new(name: "Atlético", city: "Belo Horizonte", state: "MG")
+atletico.photo.attach(io: file, filename: 'Atletico.png', content_type: 'image/png')
