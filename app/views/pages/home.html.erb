@@ -1,2 +1,7 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+
+<% Club.all.each do |club| %>
+  <%= cl_image_tag club.photo.key, height: 400, width: 400%>
+<% end  %>
