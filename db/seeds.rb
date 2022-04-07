@@ -58,7 +58,7 @@ vasco = Club.create(name: "Vasco", city: "Rio de Janeiro", state: "RJ")
 vasco.photo.attach(io: vasco_logo, filename: 'Vasco.png', content_type: 'image/png')
 
 
-10.times do
+100.times do
   match = Match.new(home: Club.all.sample, score_home: (0..4).to_a.sample, score_away: (0..4).to_a.sample, stadium: ["Maracanã", "Pacaembu", "Mineirão"].sample, competition: ["Brasileiro", "Libertadores"].sample )
   match.away = Club.where.not(id: match.home).sample
   match.date = Date.today-rand(10000)
