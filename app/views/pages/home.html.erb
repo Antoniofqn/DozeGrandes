@@ -1,7 +1,21 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1>Escolha o confronto</h1>
 
+<div class="container clubs">
+    <% Club.all.each do |club| %>
+      <%= cl_image_tag club.photo.key, height: 100, width: 100%>
+    <% end  %>
+</div>
 
-<% Club.all.each do |club| %>
-  <%= cl_image_tag club.photo.key, height: 400, width: 400%>
-<% end  %>
+<%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+  <%= f.input :home, input_html: {value: ""} %>
+  <%= f.input :away, input_html: {value: ""} %>
+  <%= f.submit "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% if params['search'].present? %>
+  <% @home = Club.find_by(name: params['search'][:home]) %>
+  <% @away = Club.find_by(name: params['search'][:away]) %>
+  <% @matches.where(home: [@home, @away], away: [@home, @away]).each do |match| %>
+    <%= match.home.name %> <%= match.score_home %> x <%= match.score_away %> <%= match.away.name %>
+  <% end %>
+<% end %>
