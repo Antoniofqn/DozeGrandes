@@ -6,32 +6,38 @@
     <% end  %>
 </div>
 
-<%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-  <%= f.input :home, input_html: {value: ""} %>
-  <%= f.input :away, input_html: {value: ""} %>
-  <%= f.input :competition, input_html: {value: ""} %>
-  <%= f.submit "Search", class: "btn btn-primary" %>
-<% end %>
-
-<table>
-  <tr>
-    <th>Data</th>
-    <th>Mandante</th>
-    <th>Resultado</th>
-    <th>Visitante</th>
-    <th>Estádio</th>
-    <th>Competição</th>
-  </tr>
-  <% if params['search'].present? %>
-    <% @matches.order('date desc').each do |match| %>
-      <tr>
-        <td><%= match.date %></td>
-        <td><%= match.home.name %></td>
-        <td><%= match.score_home %> x <%= match.score_away %></td>
-        <td><%= match.away.name %></td>
-        <td><%= match.stadium %></td>
-        <td><%= match.competition %></td>
-      </tr>
-    <% end %>
+<div class="container">
+  <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+    <%= f.input :home, input_html: {value: ""} %>
+    <%= f.input :away, input_html: {value: ""} %>
+    <%= f.input :competition, input_html: {value: ""} %>
+    <%= f.submit "Search", class: "btn btn-primary" %>
   <% end %>
-</table>
+</div>
+
+<div class="container">
+  <table class="table table-bordered table-sm">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Mandante</th>
+        <th scope="col">Resultado</th>
+        <th scope="col">Visitante</th>
+        <th scope="col">Estádio</th>
+        <th scope="col">Competição</th>
+      </tr>
+    </thead>
+      <% if params['search'].present? %>
+        <% @matches.order('date desc').each do |match| %>
+          <tr>
+            <td scope="row"><%= match.date %></td>
+            <td><%= match.home.name %></td>
+            <td><%= match.score_home %> x <%= match.score_away %></td>
+            <td><%= match.away.name %></td>
+            <td><%= match.stadium %></td>
+            <td><%= match.competition %></td>
+          </tr>
+        <% end %>
+      <% end %>
+  </table>
+</div>
