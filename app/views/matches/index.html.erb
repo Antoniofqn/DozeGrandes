@@ -18,15 +18,7 @@
 
 <div class="container">
   <% if params['search'].present?  %>
-    <% sum_home = 0  %>
-    <% sum_away = 0  %>
-    <% sum_empate = 0  %>
     <%= pie_chart @matches.group(:result).count %>
-    <%= line_chart [
-      { name: @home.name, data: @matches.where(result: @home.name).group_by_year(:date).count.map { |x,y| { x => (sum_home += y)} }.reduce({}, :merge), curve: false, points: false},
-      { name: @away.name, data: @matches.where(result: @away.name).group_by_year(:date).count.map { |x,y| { x => (sum_away += y)} }.reduce({}, :merge), curve: false, points: false},
-      { name: "Empate", data: @matches.where(result: "Empate").group_by_year(:date).count.map { |x,y| { x => (sum_empate += y)} }.reduce({}, :merge), curve: false, points: false}
-    ] %>
   <% end %>
 </div>
 
@@ -56,7 +48,3 @@
       <% end %>
   </table>
 </div>
-
-{ name: @home.name, data: @matches.where(result: @home.name).group(:id).count.map { |x,y| { x => (sum_home += y)} }.reduce({}, :merge)},
-
-tooltips: { scales: { y: [{ ticks: { beginAtZero: true }}]}}
