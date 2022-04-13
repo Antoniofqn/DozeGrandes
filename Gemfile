@@ -67,3 +67,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 #image hosting
 gem 'cloudinary', '~> 1.16.0'
+
+#charts
+gem "chartkick"
+gem "groupdate"
