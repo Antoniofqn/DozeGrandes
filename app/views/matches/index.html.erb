@@ -8,16 +8,20 @@
 
 <div class="container">
   <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-    <%= f.input :home, input_html: {value: ""} %>
-    <%= f.input :away, input_html: {value: ""} %>
-    <%= f.input :competition, input_html: {value: ""} %>
-    <%= f.input :stadium, input_html: {value: ""} %>
+    <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}"} %>
+    <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}"} %>
+      <% if params['search'].present?  %>
+        <%= f.input :competition, input_html: {value: ""} %>
+        <%= f.input :stadium, input_html: {value: ""} %>
+        <%= f.input :start_date, as: :string, discard_day: true, discard_month: true, prompt: "Select an option", input_html: {class: "datepicker"} %>
+        <%= f.input :end_date, as: :string, discard_day: true, discard_month: true, prompt: "Select an option", input_html: {class: "datepicker"} %>
+      <% end %>
     <%= f.submit "Search", class: "btn btn-primary" %>
   <% end %>
 </div>
 
 <div class="container">
-  <% if params['search'].present?  %>
+  <% if params['search'].present? %>
     <%= pie_chart @matches.group(:result).count %>
   <% end %>
 </div>

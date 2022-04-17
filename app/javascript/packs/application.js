@@ -15,3 +15,7 @@ ActiveStorage.start()
 import "controllers"
 import "bootstrap"
 import "chartkick/chart.js"
+
+import { initFlatpickr } from "../plugins/flatpickr";
+
+initFlatpickr();
