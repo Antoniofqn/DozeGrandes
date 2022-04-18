@@ -13,8 +13,8 @@
       <% if params['search'].present?  %>
         <%= f.input :competition, input_html: {value: ""} %>
         <%= f.input :stadium, input_html: {value: ""} %>
-        <%= f.input :start_date, as: :string, discard_day: true, discard_month: true, prompt: "Select an option", input_html: {class: "datepicker"} %>
-        <%= f.input :end_date, as: :string, discard_day: true, discard_month: true, prompt: "Select an option", input_html: {class: "datepicker"} %>
+        <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
+        <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
       <% end %>
     <%= f.submit "Search", class: "btn btn-primary" %>
   <% end %>
