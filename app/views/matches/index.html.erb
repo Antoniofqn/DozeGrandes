@@ -1,23 +1,25 @@
 <h1>Escolha o confronto</h1>
 
-<div class="container clubs">
-    <% Club.all.each do |club| %>
-      <%= cl_image_tag club.photo.key, height: 100, width: 100%>
-    <% end  %>
-</div>
+<div class="container" data-controller="club-click">
+  <div class="container clubs" data-action="click->club-click#fill">
+      <% Club.all.each do |club| %>
+        <%= cl_image_tag club.photo.key, height: 100, width: 100, id: club.name %>
+      <% end  %>
+  </div>
 
-<div class="container">
-  <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-    <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}"} %>
-    <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}"} %>
-      <% if params['search'].present?  %>
-        <%= f.input :competition, input_html: {value: ""} %>
-        <%= f.input :stadium, input_html: {value: ""} %>
-        <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
-        <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
-      <% end %>
-    <%= f.submit "Search", class: "btn btn-primary" %>
-  <% end %>
+  <div class="container form">
+    <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+      <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home'} %>
+      <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}", 'data-club-click-target': 'away'} %>
+        <% if params['search'].present?  %>
+          <%= f.input :competition, input_html: {value: ""} %>
+          <%= f.input :stadium, input_html: {value: ""} %>
+          <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
+          <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
+        <% end %>
+      <%= f.submit "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 
 <div class="container">
