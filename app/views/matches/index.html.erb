@@ -1,9 +1,9 @@
 <h1>Escolha o confronto</h1>
 
 <div class="container" data-controller="club-click">
-  <div class="container clubs" data-action="click->club-click#fill">
+  <div class="container clubs">
       <% Club.all.each do |club| %>
-        <%= cl_image_tag club.photo.key, height: 100, width: 100, id: club.name %>
+        <%= cl_image_tag club.photo.key, height: 100, width: 100, id: club.name, data: {action: "click->club-click#fill"} %>
       <% end  %>
   </div>
 
