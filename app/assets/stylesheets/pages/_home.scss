@@ -24,3 +24,17 @@ h3 {
   flex-direction: row;
   justify-content: space-around;
 }
+
+p {
+  text-align: center;
+}
+
+#x {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  justify-content: center;
+}

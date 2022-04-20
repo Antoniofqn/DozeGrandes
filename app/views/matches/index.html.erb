@@ -7,10 +7,19 @@
       <% end  %>
   </div>
 
-  <div class="container form">
-    <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-      <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home'} %>
-      <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}", 'data-club-click-target': 'away'} %>
+  <div class="container col-6 form mt-3">
+    <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-group' } do |f| %>
+    <div class="row">
+      <div class="col-3">
+        <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home'}, readonly: true, label: false %>
+      </div>
+      <div class="col-3" id="x">
+        <p>X</p>
+      </div>
+      <div class="col-3">
+        <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}", 'data-club-click-target': 'away'}, readonly: true, label: false%>
+      </div>
+    </div>
         <% if params['search'].present?  %>
           <%= f.input :competition, collection: @competitions %>
           <%= f.input :stadium, collection: @stadiums %>
