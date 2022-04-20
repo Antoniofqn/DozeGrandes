@@ -12,8 +12,8 @@
       <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home'} %>
       <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}", 'data-club-click-target': 'away'} %>
         <% if params['search'].present?  %>
-          <%= f.input :competition, input_html: {value: ""} %>
-          <%= f.input :stadium, input_html: {value: ""} %>
+          <%= f.input :competition, collection: @competitions %>
+          <%= f.input :stadium, collection: @stadiums %>
           <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
           <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
         <% end %>
@@ -22,9 +22,16 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container graphs">
   <% if params['search'].present? %>
-    <%= pie_chart @matches.group(:result).count %>
+    <div>
+      <h3>Resultados</h3>
+      <%= pie_chart @matches.group(:result).count %>
+    </div>
+    <div>
+      <h3>Gols</h3>
+      <%= pie_chart ({ @home.name => @home.total_goals(@matches), @away.name => @away.total_goals(@matches) }) %>
+    </div>
   <% end %>
 </div>
 

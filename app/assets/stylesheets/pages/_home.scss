@@ -14,3 +14,13 @@ h1 {
 .table th {
   text-align: center;
 }
+
+h3 {
+  text-align: center;
+}
+
+.graphs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
