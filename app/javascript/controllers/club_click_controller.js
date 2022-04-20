@@ -1,14 +1,20 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['home', 'away']
+  static targets = ['home', 'away', 'club', 'foo']
 
   connect() {
-    console.log("Hello from our first Stimulus controller")
+    this.fooValue = false
   }
 
   fill() {
-    console.log(event);
-    this.homeTarget.value = '<%= '
+    let teamOne = event.srcElement.id;
+    if (this.fooValue == true) {
+      this.awayTarget.value = teamOne;
+      this.fooValue = false;
+    } else {
+      this.homeTarget.value = teamOne;
+      this.fooValue = true;
+    }
   }
 }
