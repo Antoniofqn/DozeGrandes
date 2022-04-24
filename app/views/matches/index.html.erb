@@ -7,26 +7,42 @@
       <% end  %>
   </div>
 
-  <div class="container col-6 form mt-3">
+  <div class="container col-6 form mt-3 text-center", id="form">
     <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-group' } do |f| %>
     <div class="row">
-      <div class="col-3">
-        <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home'}, readonly: true, label: false %>
+      <div class="col-4">
+        <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home', class: "confronto"}, readonly: true, label: false %>
       </div>
-      <div class="col-3" id="x">
+      <div class="col-1" id="x">
         <p>X</p>
       </div>
-      <div class="col-3">
-        <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}", 'data-club-click-target': 'away'}, readonly: true, label: false%>
+      <div class="col-4">
+        <%= f.input :away, input_html: {value: "#{@away.name unless @away.nil?}", 'data-club-click-target': 'away', class: "confronto"}, readonly: true, label: false%>
       </div>
     </div>
         <% if params['search'].present?  %>
-          <%= f.input :competition, collection: @competitions %>
-          <%= f.input :stadium, collection: @stadiums %>
-          <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
-          <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option" %>
+          <div class="row">
+            <div class="col-4">
+              <%= f.input :competition, collection: @competitions, required: false, label: "Competição" %>
+            </div>
+            <div class="col-4">
+              <%= f.input :stadium, collection: @stadiums, required: false, label: "Estádio" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option", required: false, label: "Ano Inicial" %>
+            </div>
+            <div class="col-4">
+              <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option", required: false, label: "Ano Final" %>
+            </div>
+          </div>
         <% end %>
-      <%= f.submit "Search", class: "btn btn-primary" %>
+      <div class="row justify-content-center">
+        <div class="col-4">
+          <%= f.submit "Search", class: "btn btn-primary", id: "searchbtn" %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

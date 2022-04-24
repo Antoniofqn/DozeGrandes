@@ -38,3 +38,21 @@ p {
 .row {
   justify-content: center;
 }
+
+#form {
+  border: 1px solid rgb(235,235,235);
+  outline: none !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-radius: 5px;
+  padding: 1em;
+  margin-bottom: 16px;
+}
+
+#searchbtn {
+  text-align: center;
+  align-items: center;
+}
+
+.confronto {
+  text-align: center;
+}
