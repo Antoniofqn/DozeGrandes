@@ -51,11 +51,11 @@
   <% if params['search'].present? %>
     <div>
       <h3>Resultados</h3>
-      <%= pie_chart @matches.group(:result).count %>
+      <%= pie_chart ({ @home.name => @matches.where(result: @home.name).count, @away.name => @matches.where(result: @away.name).count, "Empate" => @matches.where(result: "Empate").count}), colors: [@home.color, @away.color, "#FFD166"] %>
     </div>
     <div>
       <h3>Gols</h3>
-      <%= pie_chart ({ @home.name => @home.total_goals(@matches), @away.name => @away.total_goals(@matches) }) %>
+      <%= pie_chart ({ @home.name => @home.total_goals(@matches), @away.name => @away.total_goals(@matches) }), colors: [@home.color, @away.color] %>
     </div>
   <% end %>
 </div>
