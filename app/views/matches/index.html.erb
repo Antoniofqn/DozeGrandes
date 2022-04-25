@@ -1,7 +1,8 @@
 <div class="container-fluid" data-controller="club-click">
+  <h4>Escolha dois clubes para ver as estatísticas do confronto</h4>
   <div class="container clubs justify-content-center">
       <% Club.all.each do |club| %>
-        <%= cl_image_tag club.photo.key, height: 100, width: 100, id: club.name, class: "club", data: {action: "click->club-click#fill", target: 'club'} %>
+        <%= cl_image_tag club.photo.key, height: 75, width: 75, id: club.name, class: "club", data: {action: "click->club-click#fill", target: 'club'} %>
       <% end  %>
   </div>
 
@@ -29,10 +30,10 @@
           </div>
           <div class="row">
             <div class="col-4">
-              <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option", required: false, label: "Ano Inicial" %>
+              <%= f.input :start_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "", required: false, label: "Ano Inicial" %>
             </div>
             <div class="col-4">
-              <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "Select an option", required: false, label: "Ano Final" %>
+              <%= f.input :end_date, as: :date, discard_day: true, discard_month: true, start_year: Date.today.year - 120, end_year: Date.today.year, prompt: "", required: false, label: "Ano Final" %>
             </div>
           </div>
         <% end %>
