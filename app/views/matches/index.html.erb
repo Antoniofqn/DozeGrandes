@@ -1,7 +1,5 @@
-<h1>Escolha o confronto</h1>
-
-<div class="container" data-controller="club-click">
-  <div class="container clubs">
+<div class="container-fluid" data-controller="club-click">
+  <div class="container clubs justify-content-center">
       <% Club.all.each do |club| %>
         <%= cl_image_tag club.photo.key, height: 100, width: 100, id: club.name, class: "club", data: {action: "click->club-click#fill", target: 'club'} %>
       <% end  %>
@@ -9,7 +7,7 @@
 
   <div class="container col-6 form mt-3 text-center", id="form">
     <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-group' } do |f| %>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-4">
         <%= f.input :home, input_html: {value: "#{@home.name unless @home.nil?}",  'data-club-click-target': 'home', class: "confronto"}, readonly: true, label: false %>
       </div>
@@ -60,7 +58,7 @@
   <% end %>
 </div>
 
-<div class="container">
+<div class="container mt-3">
   <table class="table table-bordered table-sm">
     <thead class="thead-dark">
       <tr>
