@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require "open-uri"
+require "csv"
+filepath = "lib/csv/atleticobotafogoformatted.csv"
 
 
 atletico_logo = URI.open("https://res.cloudinary.com/dbqyyc17d/image/upload/v1649258877/bythcxxlcue6todlrqiw.png")
@@ -58,10 +60,25 @@ vasco = Club.create(name: "Vasco", city: "Rio de Janeiro", state: "RJ", color: "
 vasco.photo.attach(io: vasco_logo, filename: 'Vasco.png', content_type: 'image/png')
 
 
-1000.times do
+
+
+=begin 1000.times do
   match = Match.new(home: Club.all.sample, score_home: (0..4).to_a.sample, score_away: (0..4).to_a.sample, stadium: ["Maracanã", "Pacaembu", "Mineirão"].sample, competition: ["Brasileiro", "Libertadores"].sample )
   match.away = Club.where.not(id: match.home).sample
   match.date = Date.today-rand(20000)
+  if match.score_home == match.score_away
+    match.result = "Empate"
+  elsif match.score_home > match.score_away
+    match.result = match.home.name
+  else
+    match.result = match.away.name
+  end
+  match.save!
+end
+=end
+
+ CSV.foreach(filepath, headers: :first_row) do |row|
+  match = Match.new(home: Club.find_by(name: row['Casa']), away: Club.find_by(name: row['Visitante']), competition: row['Competição'], date: Date.strptime(row['Data'], '%d/%m/%Y'), score_home: row['Placar'][0], score_away: row['Placar'][-1], stadium: row['Estádio'])
   if match.score_home == match.score_away
     match.result = "Empate"
   elsif match.score_home > match.score_away
